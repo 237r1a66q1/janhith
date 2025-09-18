@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Community Issues</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .preview-img, .preview-video {
+      max-width: 150px;
+      margin: 5px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans">
+  <!-- Navbar -->
+  <div class="bg-white shadow-md p-4 flex justify-between items-center">
+    <h1 class="text-2xl font-bold text-green-700">Naagrik</h1>
+    <nav class="space-x-6">
+      <a href="index.html" class="text-gray-700 hover:text-green-600">Home</a>
+      <a href="issues.html" class="text-green-700 font-semibold">Issues</a>
+      <a href="report.html" class="text-gray-700 hover:text-green-600">Report Issue</a>
+    </nav>
+  </div>
+
+  <!-- Issues List -->
+  <div class="max-w-6xl mx-auto p-6">
+    <h2 class="text-2xl font-bold mb-6">Reported Issues</h2>
+    <div id="issues-list" class="space-y-6"></div>
+  </div>
+
+  <script>
+    function loadIssues() {
+      let issues = JSON.parse(localStorage.getItem("issues")) || [];
+      let container = document.getElementById("issues-list");
+      container.innerHTML = "";
+
+      if (issues.length === 0) {
+        container.innerHTML = "<p class='text-gray-600'>No issues reported yet.</p>";
+        return;
+      }
+
+      issues.forEach((issue, index) => {
+        let issueCard = document.createElement("div");
+        issueCard.className = "bg-white p-6 rounded-lg shadow";
+
+        issueCard.innerHTML = `
+          <h3 class="text-xl font-bold text-green-700 mb-2">${issue.title}</h3>
+          <p class="text-gray-600 mb-2">${issue.desc}</p>
+          <p><strong>Category:</strong> ${issue.category}</p>
+          <p><strong>Zone:</strong> ${issue.zone}</p>
+          <p><strong>Priority:</strong> ${issue.priority}</p>
+          <p><strong>Status:</strong> <span class="${issue.status === "RESOLVED" ? "text-green-600" : "text-red-600"}">${issue.status}</span></p>
+          <p><strong>Location:</strong> Lat: ${issue.lat}, Lng: ${issue.lng}</p>
+          ${issue.landmark ? `<p><strong>Landmark:</strong> ${issue.landmark}</p>` : ""}
+          <p class="text-sm text-gray-500">Reported on: ${issue.createdAt}</p>
+
+          <div class="mt-4">
+            <strong>Uploaded Files:</strong>
+            <div class="flex flex-wrap mt-2">
+              ${issue.files && issue.files.length > 0 
+                ? issue.files.map(file => {
+                    if (file.startsWith("data:image")) {
+                      return `<img src="${file}" class="preview-img">`;
+                    } else if (file.startsWith("data:video")) {
+                      return `<video src="${file}" class="preview-video" controls></video>`;
+                    } else {
+                      return "";
+                    }
+                  }).join("")
+                : "<p class='text-gray-500'>No files uploaded</p>"
+              }
+            </div>
+          </div>
+
+          <div class="mt-4">
+            ${issue.status === "OPEN" 
+              ? `<button onclick="resolveIssue(${index})" class="bg-green-600 text-white px-4 py-2 rounded">Mark as Resolved</button>` 
+              : `<span class="text-green-700 font-semibold">✅ Resolved</span>`
+            }
+          </div>
+        `;
+
+        container.appendChild(issueCard);
+      });
+    }
+
+    function resolveIssue(index) {
+      let issues = JSON.parse(localStorage.getItem("issues")) || [];
+      issues[index].status = "RESOLVED";
+      localStorage.setItem("issues", JSON.stringify(issues));
+      loadIssues();
+    }
+
+    // Load on page start
+    window.onload = loadIssues;
+  </script>
+</body>
+</html>

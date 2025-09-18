@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Janahith - Building Better Communities</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      color: #333;
+    }
+
+    /* Navbar */
+    header {
+      background: #0907aa;
+      color: white;
+      padding: 15px 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header .logo {
+      font-size: 20px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    nav a {
+      margin: 0 12px;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .auth-buttons button {
+      background: white;
+      color: #c5def6;
+      border: none;
+      padding: 8px 14px;
+      margin-left: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .auth-buttons button:hover {
+      background: #e6f3ff;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: #8c9aeb;
+      color: rgb(242, 248, 248);
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .hero h1 {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .hero .buttons button {
+      background: white;
+      color: #4da6ff;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      margin: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .hero .buttons button:hover {
+      background: #e6f3ff;
+    }
+
+    /* Stats Section */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+      padding: 40px 20px;
+      background: white;
+      text-align: center;
+    }
+
+    .stat h2 {
+      color: #4da6ff;
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    /* How it works */
+    .how-it-works {
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .how-it-works h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #4da6ff;
+    }
+
+    .features {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .feature {
+      background: white;
+      padding: 20px;
+      width: 230px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .feature h3 {
+      margin-bottom: 10px;
+      color: #4da6ff;
+    }
+
+    .feature p {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .feature button {
+      background: #4da6ff;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    .feature button:hover {
+      background: #3399ff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <div class="logo"><i class="fa-solid fa-user"></i> Janahith</div>
+    <nav>
+      <a href="#"><i class="fa-solid fa-house"></i> Home</a>
+      <a href="#"><i class="fa-solid fa-triangle-exclamation"></i> Report Issue</a>
+      <a href="#"><i class="fa-solid fa-map"></i> Map View</a>
+      <a href="#"><i class="fa-solid fa-list"></i> Issues</a>
+    </nav>
+    <div class="auth-buttons">
+      <button onclick="window.location.href='signin.html'">Sign in</button>
+      <button onclick="window.location.href='signup.html'">Sign up</button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Building Better Communities</h1>
+    <p>Report issues, track progress, and engage with your local community to create positive change where you live.</p>
+    <div class="buttons">
+      <button onclick="window.location.href='signup.html'">Get Started</button>
+      <button onclick="window.location.href='signin.html'">Sign In</button>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats">
+    <div class="stat">
+      <h2>2</h2>
+      <p>Issues Reported</p>
+    </div>
+    <div class="stat">
+      <h2>1</h2>
+      <p>Issues Resolved</p>
+    </div>
+    <div class="stat">
+      <h2>1</h2>
+      <p>Active Citizens</p>
+    </div>
+    <div class="stat">
+      <h2>24%</h2>
+      <p>Response Rate</p>
+    </div>
+  </section>
+
+  <!-- How it Works -->
+  <section class="how-it-works">
+    <h2>How Janahith Works</h2>
+    <p>Our platform makes it easy to report issues, track progress, and collaborate with your community to create positive change.</p>
+    <div class="features">
+      <div class="feature">
+        <h3>Report Issues</h3>
+        <p>Easily report community problems with photos and location data.</p>
+        <button>Learn More</button>
+      </div>
+      <div class="feature">
+        <h3>Interactive Map</h3>
+        <p>View issues on an interactive map of your community.</p>
+        <button>Learn More</button>
+      </div>
+      <div class="feature">
+        <h3>Community Engagement</h3>
+        <p>Connect with neighbors and local authorities.</p>
+        <button>Learn More</button>
+      </div>
+      <div class="feature">
+        <h3>Emergency Reporting</h3>
+        <p>Quick access for emergency and urgent situations.</p>
+        <button>Learn More</button>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

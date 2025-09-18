@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Janahith - Sign Up</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      background: #f0f8ff;
+      color: #333;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      background: #4da6ff;
+      color: white;
+      padding: 15px 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    header .logo {
+      font-size: 20px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    nav a {
+      margin: 0 12px;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .auth-buttons button {
+      background: white;
+      color: #4da6ff;
+      border: none;
+      padding: 8px 14px;
+      margin-left: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .auth-buttons button:hover {
+      background: #e6f3ff;
+    }
+
+    .signup-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .signup-icon {
+      font-size: 50px;
+      color: #4da6ff;
+      background: white;
+      padding: 15px;
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+
+    .signup-container h1 {
+      font-size: 28px;
+      color: #4da6ff;
+      margin-bottom: 10px;
+    }
+
+    .signup-container p {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 30px;
+    }
+
+    .form-box {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      width: 350px;
+      text-align: left;
+    }
+
+    .form-box h2 {
+      color: #4da6ff;
+      font-size: 20px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .form-box label {
+      font-size: 14px;
+      font-weight: bold;
+      color: #333;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .form-box input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    .form-box input:focus {
+      border-color: #4da6ff;
+      outline: none;
+      box-shadow: 0 0 5px rgba(77,166,255,0.3);
+    }
+
+    .form-box button {
+      width: 100%;
+      background: #4da6ff;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .form-box button:hover {
+      background: #3399ff;
+    }
+
+    .form-box p {
+      text-align: center;
+      font-size: 14px;
+      margin-top: 15px;
+    }
+
+    .form-box p a {
+      color: #4da6ff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .form-box p a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <div class="logo"><i class="fa-solid fa-user"></i> Janahith</div>
+    <nav>
+      <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+      <a href="#"><i class="fa-solid fa-triangle-exclamation"></i> Report Issue</a>
+      <a href="#"><i class="fa-solid fa-map"></i> Map View</a>
+      <a href="#"><i class="fa-solid fa-list"></i> Issues</a>
+    </nav>
+    <div class="auth-buttons">
+      <button onclick="window.location.href='signin.html'">Sign in</button>
+      <button onclick="window.location.href='signup.html'">Sign up</button>
+    </div>
+  </header>
+
+  <!-- Signup Page -->
+  <div class="signup-container">
+    <div class="signup-icon"><i class="fa-solid fa-users"></i></div>
+    <h1>Join Janahith</h1>
+    <p>Create your account and start making a difference in your community</p>
+
+    <div class="form-box">
+      <h2>Create your account</h2>
+      <form id="signupForm">
+        <label>Full Name</label>
+        <input type="text" placeholder="Enter your full name" required>
+
+        <label>Email address</label>
+        <input type="email" placeholder="Enter your email" required>
+
+        <label>Password</label>
+        <input type="password" placeholder="Create a password" required>
+        <small>Must contain at least 6 characters with uppercase, lowercase, and number</small><br><br>
+
+        <label>Confirm Password</label>
+        <input type="password" placeholder="Confirm your password" required>
+
+        <button type="submit">Create account</button>
+      </form>
+      <p>Already have an account? <a href="signin.html">Sign in here</a></p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("signupForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("Account created successfully! (Demo only)");
+    });
+  </script>
+</body>
+</html>

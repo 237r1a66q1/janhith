@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Issue Report</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <style>
+    #map {
+      height: 300px;
+      border-radius: 8px;
+    }
+    .upload-box {
+      border: 2px dashed #ccc;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.3s ease;
+    }
+    .upload-box:hover {
+      border-color: #4caf50;
+    }
+    .preview-img, .preview-video {
+      max-width: 150px;
+      margin: 10px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans">
+  <!-- Navbar -->
+  <div class="bg-white shadow-md p-4 flex justify-between items-center">
+    <h1 class="text-2xl font-bold text-green-700">Janhith</h1>
+    <nav class="space-x-6">
+      <a href="index.html" class="text-gray-700 hover:text-green-600">Home</a>
+      <a href="issues.html" class="text-gray-700 hover:text-green-600">Issues</a>
+      <a href="report.html" class="text-green-700 font-semibold">Report Issue</a>
+    </nav>
+  </div>
+
+  <div class="max-w-7xl mx-auto p-6">
+    <!-- Header -->
+    <div class="text-center mb-6">
+      <div class="mx-auto bg-green-100 w-16 h-16 flex items-center justify-center rounded-full">
+        <span class="text-green-600 text-3xl">⚠</span>
+      </div>
+      <h2 class="text-3xl font-bold mt-2">Create Issue Report</h2>
+      <p class="text-gray-600">Report community issues with precise location mapping. Click on the map to pinpoint the exact location.</p>
+    </div>
+
+    <!-- Emergency Banner -->
+    <div class="bg-red-50 border border-red-200 text-red-700 p-4 rounded-lg mb-6">
+      <strong>🚨 Emergency Situations:</strong> For immediate emergencies requiring police, fire, or medical assistance, please call emergency services directly.  
+      <div class="mt-2 space-x-4">
+        <span class="bg-red-600 text-white px-3 py-1 rounded">Emergency: 911</span>
+        <span class="bg-yellow-600 text-white px-3 py-1 rounded">Non-Emergency: 311</span>
+      </div>
+    </div>
+
+    <!-- Two Column Layout -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Left Column -->
+      <div class="bg-white p-6 shadow rounded-lg">
+        <h3 class="text-lg font-semibold mb-4">Issue Details</h3>
+        <label class="block mb-2">Issue Title *</label>
+        <input id="issue-title" class="w-full border rounded px-3 py-2 mb-4" placeholder="Enter issue title">
+
+        <label class="block mb-2">Description *</label>
+        <textarea id="issue-desc" class="w-full border rounded px-3 py-2 mb-4" rows="3" placeholder="Enter description"></textarea>
+
+        <label class="block mb-2">Category *</label>
+        <select id="issue-category" class="w-full border rounded px-3 py-2 mb-4">
+          <option>Select a category</option>
+          <option>Road</option>
+          <option>Electricity</option>
+          <option>Water</option>
+          <option>Waste</option>
+        </select>
+
+        <label class="block mb-2">Zone *</label>
+        <select id="issue-zone" class="w-full border rounded px-3 py-2 mb-4">
+          <option>Select a zone</option>
+          <option>North</option>
+          <option>South</option>
+          <option>East</option>
+          <option>West</option>
+        </select>
+
+        <label class="block mb-2">Priority Level *</label>
+        <div class="space-y-2 mb-4">
+          <label><input type="radio" name="priority" value="Low"> Low Priority</label><br>
+          <label><input type="radio" name="priority" value="Medium"> Medium Priority</label><br>
+          <label><input type="radio" name="priority" value="High"> High Priority</label>
+        </div>
+
+        <!-- Upload -->
+        <label class="block mb-2">Photos or Videos (Optional)</label>
+        <div class="upload-box" onclick="document.getElementById('issue-files').click()">
+          <p>📷 Upload Photos or Videos</p>
+          <p class="text-sm text-gray-500">Max 5 files, 10MB each</p>
+        </div>
+        <input type="file" id="issue-files" accept="image/*,video/*" multiple style="display:none" onchange="previewFiles(event)">
+        <div id="preview-container" class="flex flex-wrap mt-3"></div>
+      </div>
+
+      <!-- Right Column -->
+      <div class="bg-white p-6 shadow rounded-lg">
+        <h3 class="text-lg font-semibold mb-4">Location Selection</h3>
+        <div id="map"></div>
+
+        <button onclick="getLocation()" class="bg-green-600 text-white px-3 py-2 rounded mt-4 mr-2">📍 Get My Location</button>
+        <button onclick="clearLocation()" class="bg-gray-300 px-3 py-2 rounded mt-4">❌ Clear</button>
+
+        <div class="mt-4">
+          <label class="block mb-2">Latitude *</label>
+          <input id="lat" class="w-full border rounded px-3 py-2 mb-2">
+
+          <label class="block mb-2">Longitude *</label>
+          <input id="lng" class="w-full border rounded px-3 py-2 mb-2">
+
+          <label class="block mb-2">Address or Landmark (Optional)</label>
+          <input id="landmark" class="w-full border rounded px-3 py-2 mb-2">
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <div class="mt-6 text-center">
+      <button onclick="saveIssue()" class="bg-green-600 text-white px-6 py-3 rounded-lg">✅ Submit Issue Report</button>
+    </div>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <script>
+    let uploadedFiles = [];
+    let map, marker;
+
+    // Initialize Map
+    window.onload = function () {
+      map = L.map('map').setView([17.385044, 78.486671], 13); // Default Hyderabad
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(map);
+
+      // Map click event
+      map.on('click', function (e) {
+        let lat = e.latlng.lat.toFixed(6);
+        let lng = e.latlng.lng.toFixed(6);
+
+        if (marker) map.removeLayer(marker);
+        marker = L.marker([lat, lng], { draggable: true }).addTo(map);
+
+        document.getElementById("lat").value = lat;
+        document.getElementById("lng").value = lng;
+
+        marker.on("dragend", function (ev) {
+          let pos = ev.target.getLatLng();
+          document.getElementById("lat").value = pos.lat.toFixed(6);
+          document.getElementById("lng").value = pos.lng.toFixed(6);
+        });
+      });
+    };
+
+    // Preview selected images/videos
+    function previewFiles(event) {
+      let files = event.target.files;
+      let container = document.getElementById("preview-container");
+      container.innerHTML = "";
+      uploadedFiles = [];
+
+      Array.from(files).slice(0, 5).forEach(file => {
+        if (file.size > 10 * 1024 * 1024) {
+          alert(file.name + " is too large (max 10MB). Skipping.");
+          return;
+        }
+
+        let reader = new FileReader();
+        reader.onload = function(e) {
+          uploadedFiles.push(e.target.result);
+          let el;
+          if (file.type.startsWith("image/")) {
+            el = document.createElement("img");
+            el.src = e.target.result;
+            el.className = "preview-img";
+          } else if (file.type.startsWith("video/")) {
+            el = document.createElement("video");
+            el.src = e.target.result;
+            el.className = "preview-video";
+            el.controls = true;
+          }
+          container.appendChild(el);
+        }
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // Geolocation
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(pos => {
+          let lat = pos.coords.latitude;
+          let lng = pos.coords.longitude;
+
+          map.setView([lat, lng], 15);
+
+          if (marker) map.removeLayer(marker);
+          marker = L.marker([lat, lng], { draggable: true }).addTo(map);
+
+          document.getElementById("lat").value = lat.toFixed(6);
+          document.getElementById("lng").value = lng.toFixed(6);
+
+          marker.on("dragend", function (ev) {
+            let pos = ev.target.getLatLng();
+            document.getElementById("lat").value = pos.lat.toFixed(6);
+            document.getElementById("lng").value = pos.lng.toFixed(6);
+          });
+        });
+      } else {
+        alert("Geolocation not supported");
+      }
+    }
+
+    function clearLocation() {
+      document.getElementById("lat").value = "";
+      document.getElementById("lng").value = "";
+      if (marker) {
+        map.removeLayer(marker);
+        marker = null;
+      }
+    }
+
+    // Save issue to localStorage
+    function saveIssue() {
+      let title = document.getElementById("issue-title").value;
+      let desc = document.getElementById("issue-desc").value;
+      let category = document.getElementById("issue-category").value;
+      let zone = document.getElementById("issue-zone").value;
+      let priority = document.querySelector('input[name="priority"]:checked')?.value || "Not Set";
+      let lat = document.getElementById("lat").value;
+      let lng = document.getElementById("lng").value;
+      let landmark = document.getElementById("landmark").value;
+
+      if (!title || !desc || category === "Select a category" || zone === "Select a zone" || !lat || !lng) {
+        alert("⚠ Please fill all required fields!");
+        return;
+      }
+
+      let newIssue = {
+        title, desc, category, zone, priority, lat, lng, landmark,
+        files: uploadedFiles,
+        status: "OPEN",
+        createdAt: new Date().toLocaleString()
+      };
+
+      let issues = JSON.parse(localStorage.getItem("issues")) || [];
+      issues.push(newIssue);
+      localStorage.setItem("issues", JSON.stringify(issues));
+
+      alert("✅ Issue Submitted Successfully!");
+      window.location.href = "issues.html";
+    }
+  </script>
+</body>
+</html>

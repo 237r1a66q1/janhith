@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Janahith - Sign In</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      background: #f0f8ff;
+      color: #333;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Navbar */
+    header {
+      background: #4da6ff;
+      color: white;
+      padding: 15px 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    header .logo {
+      font-size: 20px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    nav a {
+      margin: 0 12px;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .auth-buttons button {
+      background: white;
+      color: #4da6ff;
+      border: none;
+      padding: 8px 14px;
+      margin-left: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .auth-buttons button:hover {
+      background: #e6f3ff;
+    }
+
+    /* Sign-in Container */
+    .signin-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .signin-icon {
+      font-size: 50px;
+      color: #4da6ff;
+      background: white;
+      padding: 15px;
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+
+    .signin-container h1 {
+      font-size: 28px;
+      color: #4da6ff;
+      margin-bottom: 10px;
+    }
+
+    .signin-container p {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 30px;
+    }
+
+    /* Form Box */
+    .form-box {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      width: 350px;
+      text-align: left;
+    }
+
+    .form-box h2 {
+      color: #4da6ff;
+      font-size: 20px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .form-box label {
+      font-size: 14px;
+      font-weight: bold;
+      color: #333;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .form-box input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    .form-box input:focus {
+      border-color: #4da6ff;
+      outline: none;
+      box-shadow: 0 0 5px rgba(77,166,255,0.3);
+    }
+
+    .form-box .remember {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .form-box .remember label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .form-box .remember a {
+      color: #4da6ff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .form-box .remember a:hover {
+      text-decoration: underline;
+    }
+
+    .form-box button {
+      width: 100%;
+      background: #4da6ff;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .form-box button:hover {
+      background: #3399ff;
+    }
+
+    .form-box p {
+      text-align: center;
+      font-size: 14px;
+      margin-top: 15px;
+    }
+
+    .form-box p a {
+      color: #4da6ff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .form-box p a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <div class="logo"><i class="fa-solid fa-user"></i> Janahith</div>
+    <nav>
+      <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+      <a href="#"><i class="fa-solid fa-triangle-exclamation"></i> Report Issue</a>
+      <a href="#"><i class="fa-solid fa-map"></i> Map View</a>
+      <a href="#"><i class="fa-solid fa-list"></i> Issues</a>
+    </nav>
+    <div class="auth-buttons">
+      <button onclick="window.location.href='signin.html'">Sign in</button>
+      <button onclick="window.location.href='signup.html'">Sign up</button>
+    </div>
+  </header>
+
+  <!-- Sign-in Section -->
+  <div class="signin-container">
+    <div class="signin-icon"><i class="fa-solid fa-user"></i></div>
+    <h1>Welcome Back</h1>
+    <p>Sign in to your Janahith account</p>
+
+    <div class="form-box">
+      <h2>Sign in to your account</h2>
+      <form id="signinForm">
+        <label>Email address</label>
+        <input type="email" placeholder="Enter your email" required>
+
+        <label>Password</label>
+        <input type="password" placeholder="Enter your password" required>
+
+        <div class="remember">
+          <label><input type="checkbox"> Remember me</label>
+          <a href="#">Forgot your password?</a>
+        </div>
+
+        <button type="submit">Sign in</button>
+      </form>
+      <p>Don’t have an account? <a href="signup.html">Sign up here</a></p>
+    </div>
+  </div>
+
+  <script>
+  document.getElementById("signinForm").addEventListener("submit", function(e) {
+    e.preventDefault(); // stop page reload
+
+    const email = document.querySelector("input[type='email']").value;
+    const password = document.querySelector("input[type='password']").value;
+
+    if (email && password) {
+      // ✅ Redirect to dashboard page
+      window.location.href = "dashboard.html";
+    } else {
+      alert("Please enter email and password");
+    }
+  });
+</script>
+
+</body>
+</html>
